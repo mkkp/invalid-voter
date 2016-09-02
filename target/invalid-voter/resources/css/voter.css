@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+.topBox {
+	display: inline-block;
+	margin-right: 10px;
+}
