@@ -111,9 +111,18 @@ function clearContent() {
 	drawBackground();
 }
 
-function downloadImage(){
-	link.href = document.getElementById(drawingArea).toDataURL();
-    link.download = "ervenytelen_szavazat.jpg";
+function downloadImage() {
+	canvas.toBlob(saveAs, "image/jpeg", 1);
+}
+
+function saveAs(blob) {
+	var url = URL.createObjectURL(blob);
+	var a = document.createElement("a");
+	a.setAttribute("href", url);
+	a.setAttribute("download", "szavazolap.jpg");
+	a.setAttribute("type", "image/jpeg");
+	a.click();
+	a.remove();
 }
 
 var keys = {

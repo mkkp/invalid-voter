@@ -21,7 +21,7 @@
 				width="30px">
 		</div>
 		<button id="clearBtn" onclick="clearContent();">Törlés</button>
-		<button id="clearBtn" onclick="downloadImage();">Letöltés</button>
+		<button id="downloadBtn" onclick="downloadImage();">Letöltés</button>
 	</div>
 	<canvas id="drawingArea" onmousemove="updateMouseCoordinates(event)"
 		onmousedown="mouseButtonPressed(event)"
