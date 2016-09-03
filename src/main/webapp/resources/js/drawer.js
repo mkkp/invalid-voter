@@ -1,6 +1,6 @@
 var canvas;
 var context;
-
+var background;
 var color;
 var lineWidth;
 var actualPosition = {
@@ -19,10 +19,26 @@ function init() {
 	canvas.height = window.innerHeight;
 	context = canvas.getContext("2d");
 
+	drawBackground();
+
 	setCursorByID("drawingArea", "crosshair");
 
 	setLineWidth();
 	setColor();
+}
+
+function drawBackground() {
+	background = new Image();
+	background.src = "resources/images/szavazolap.jpg";
+
+	background.onload = backgroundLoaded;
+}
+
+function backgroundLoaded(event) {
+	context.save();
+	canvas.width = background.width;
+	context.drawImage(background, 0, 0, background.width, background.height);
+	context.restore();
 }
 
 function updatePencilColor(event) {
@@ -70,6 +86,8 @@ function saveActualPosition(event) {
 
 function draw() {
 	context.save();
+	context.lineJoin = "round";
+	context.lineCap = "round";
 	context.beginPath();
 	context.moveTo(lastPosition.x, lastPosition.y);
 	context.lineTo(actualPosition.x, actualPosition.y);
@@ -90,6 +108,12 @@ function setCursorByID(id, cursorStyle) {
 
 function clearContent() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	drawBackground();
+}
+
+function downloadImage(){
+	link.href = document.getElementById(drawingArea).toDataURL();
+    link.download = "ervenytelen_szavazat.jpg";
 }
 
 var keys = {
@@ -114,12 +138,11 @@ function preventDefaultForScrollKeys(e) {
 }
 
 function disableScroll() {
-	if (window.addEventListener) // older FF
+	if (window.addEventListener) {
 		window.addEventListener('DOMMouseScroll', preventDefault, false);
-	window.onwheel = preventDefault; // modern standard
-	window.onmousewheel = document.onmousewheel = preventDefault; // older
-	// browsers,
-	// IE
-	window.ontouchmove = preventDefault; // mobile
+	}
+	window.onwheel = preventDefault;
+	window.onmousewheel = document.onmousewheel = preventDefault;
+	window.ontouchmove = preventDefault;
 	document.onkeydown = preventDefaultForScrollKeys;
 }

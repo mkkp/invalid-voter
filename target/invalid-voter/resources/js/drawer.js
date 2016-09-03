@@ -18,14 +18,24 @@ function init() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	context = canvas.getContext("2d");
-
+	
+	drawBackground();
+	
 	setCursorByID("drawingArea", "crosshair");
 
 	setLineWidth();
 	setColor();
-
-	drawBackground();
 }
+
+function drawBackground(){
+	var background = new Image();
+	background.src = "/resources/images/szavazolap.jpg";
+
+	background.onload = function(){
+	    context.drawImage(background,0,0);   
+	}​
+}
+
 
 function updatePencilColor(event) {
 	setColor();
@@ -41,18 +51,6 @@ function setLineWidth() {
 
 function setColor() {
 	color = document.getElementById("pencilColorPicker").value;
-}
-
-function drawBackground() {
-	console.log("canvas params: " + canvas.width + " " + canvas.height);
-	var image = new Image();
-	image.onload = function() {
-		context.drawImage(image, 0, 0);
-	}
-	image.src = "/invalid-voter/resources/images/bg.jpg";
-	context.lineJoin = "round";
-	context.lineCap = "round";
-	context.save();
 }
 
 function mouseButtonPressed(event) {
@@ -96,9 +94,45 @@ function draw() {
 
 function setCursorByID(id, cursorStyle) {
 	var elem;
-	if (document.getElementById &&
-		(elem = document.getElementById(id))) {
+	if (document.getElementById && (elem = document.getElementById(id))) {
 		if (elem.style)
 			elem.style.cursor = cursorStyle;
 	}
+}
+
+function clearContent() {
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	drawBackground();
+}
+
+var keys = {
+	37 : 1,
+	38 : 1,
+	39 : 1,
+	40 : 1
+};
+
+function preventDefault(e) {
+	e = e || window.event;
+	if (e.preventDefault)
+		e.preventDefault();
+	e.returnValue = false;
+}
+
+function preventDefaultForScrollKeys(e) {
+	if (keys[e.keyCode]) {
+		preventDefault(e);
+		return false;
+	}
+}
+
+function disableScroll() {
+	if (window.addEventListener) // older FF
+		window.addEventListener('DOMMouseScroll', preventDefault, false);
+	window.onwheel = preventDefault; // modern standard
+	window.onmousewheel = document.onmousewheel = preventDefault; // older
+	// browsers,
+	// IE
+	window.ontouchmove = preventDefault; // mobile
+	document.onkeydown = preventDefaultForScrollKeys;
 }
