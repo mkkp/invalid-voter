@@ -14,9 +14,9 @@ var lastPosition = {
 var isDrawing = false;
 
 function init() {
+	initFacebook();
 	canvas = document.getElementsByTagName('canvas')[0];
 	context = canvas.getContext("2d");
-
 	drawBackground();
 
 	setCursorByID("drawingArea", "crosshair");
@@ -153,4 +153,24 @@ function disableScroll() {
 	window.onmousewheel = document.onmousewheel = preventDefault;
 	window.ontouchmove = preventDefault;
 	document.onkeydown = preventDefaultForScrollKeys;
+}
+
+function initFacebook() {
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId : "",
+			xfbml : true,
+			version : "v2.7"
+		});
+	};
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/hu_HU/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, "script", "facebook-jssdk"));
 }
