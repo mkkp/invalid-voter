@@ -118,7 +118,7 @@ function saveAs(blob) {
 	var url = URL.createObjectURL(blob);
 	var a = document.createElement("a");
 	a.setAttribute("href", url);
-	a.setAttribute("download", "szavazolap.jpg");
+	a.setAttribute("download", "ervenytelen-szavazolap.jpg");
 	a.setAttribute("type", "image/jpeg");
 	a.click();
 	a.remove();

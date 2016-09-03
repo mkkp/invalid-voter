@@ -28,12 +28,14 @@
 				onchange="updatePencilWidth(event)" min="1" max="50" value="5"
 				width="30px">
 		</div>
-		<button id="clearBtn" onclick="clearContent();">Törlés</button>
-		<button id="downloadBtn" onclick="downloadImage();">Letöltés</button>
-		<div id="share" class="btn">
-			<div class="fb-share-button" data-href="" data-layout="button"
-				data-size="large" data-mobile-iframe="true">
-				<a class="fb-xfbml-parse-ignore" target="_blank" href="">Megosztás</a>
+		<div class="topBox">
+			<button id="clearBtn" onclick="clearContent();">Törlés</button>
+			<button id="downloadBtn" onclick="downloadImage();">Letöltés</button>
+			<div id="share" class="btn">
+				<div class="fb-share-button" data-href="" data-layout="button"
+					data-size="large" data-mobile-iframe="true">
+					<a class="fb-xfbml-parse-ignore" target="_blank" href="">Megosztás</a>
+				</div>
 			</div>
 		</div>
 	</div>
