@@ -5,3 +5,6 @@
 
 ## Bugs
 * Canvas size is bigger than the loaded image
+
+### Formatting help
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
