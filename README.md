@@ -3,8 +3,8 @@
 * TODO: Need facebook share option
 * TODO: Need save option (to database, need a database)
 
-## Bugs
-* Canvas size is bigger than the loaded image
+## Known bugs
+
 
 ### Formatting help
 https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet

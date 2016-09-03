@@ -15,8 +15,6 @@ var isDrawing = false;
 
 function init() {
 	canvas = document.getElementsByTagName('canvas')[0];
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
 	context = canvas.getContext("2d");
 
 	drawBackground();
@@ -37,6 +35,7 @@ function drawBackground() {
 function backgroundLoaded(event) {
 	context.save();
 	canvas.width = background.width;
+	canvas.height = background.height;
 	context.drawImage(background, 0, 0, background.width, background.height);
 	context.restore();
 }

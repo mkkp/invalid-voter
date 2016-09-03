@@ -7,7 +7,3 @@ html, body {
 	display: inline-block;
 	margin-right: 10px;
 }
-
-canvas {
-	height: 100%;
-}
