@@ -1,0 +1,35 @@
+<html>
+<head>
+<script type="text/javascript"
+	src="./js/drawer.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="./css/voter.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Érvénytelen szavazás gyakorló</title>
+</head>
+<body onLoad="init()">
+	<section class="container">
+		<div class="row">
+			<div class="col-md-12 toolbar">
+				<b>Szín:</b>
+				<input type="color" name="pencilColorPicker" id="pencilColorPicker"
+					value="#FF0000" onchange="updatePencilColor(event)">
+				<b>Vonalvastagság:</b>
+				<input type="number" name="pencilWidthInput" id="pencilWidthInput"
+					onchange="updatePencilWidth(event)" min="1" max="50" value="5"
+					width="30px">
+				<button id="clearBtn" class="btn btn-danger" onclick="clearContent();">Törlés</button>
+				<button id="downloadBtn" class="btn btn-primary" onclick="downloadImage();">Letöltés</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" id="canvasContainer">
+				<canvas id="drawingArea" onmousemove="updateMouseCoordinates(event)"
+					onmousedown="mouseButtonPressed(event)"
+					onmouseup="mouseButtonReleased(event)"
+					onmouseleave="mouseLeaved(event)"></canvas>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

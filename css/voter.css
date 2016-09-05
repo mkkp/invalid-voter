@@ -1,0 +1,27 @@
+html, body {
+	margin: 0px;
+	overflow: hidden;
+}
+
+body {
+	background-image: url("../images/bg.jpg");
+	background-size: cover;
+}
+
+#canvasContainer {
+	text-align: center;
+}
+
+#drawingArea {
+	display: inline-block;
+	box-shadow: 0px 2px 10px #000000;
+}
+
+.toolbar{
+	text-align: center;
+	color: #ffffff;
+}
+
+#pencilWidthInput {
+	color: #000000;
+}
