@@ -17,7 +17,7 @@ var isDrawing = false;
 function init() {
 	canvas = document.getElementById("drawingArea");
 	context = canvas.getContext("2d");
-	
+
 	canvasContainer = document.getElementById("canvasContainer");
 
 	drawBackground();
@@ -85,7 +85,6 @@ function saveActualPosition(event) {
 	var rect = canvas.getBoundingClientRect();
 	actualPosition.x = event.clientX - rect.left;
 	actualPosition.y = event.clientY - rect.top;
-	console.log(event.clientX + " "+ event.clientY+ " " + event.screenX+ " " + event.screenY+" "+canvas.offsetLeft+" "+canvas.offsetTop);
 }
 
 function draw() {
