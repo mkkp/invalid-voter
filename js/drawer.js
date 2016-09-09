@@ -158,3 +158,20 @@ function disableScroll() {
 	window.ontouchmove = preventDefault;
 	document.onkeydown = preventDefaultForScrollKeys;
 }
+
+function shareOnFacebook() {
+	canvas.toBlob(publishOnFacebook, "image/jpeg", 1);
+}
+
+function publishOnFacebook(blob) {
+	FB.ui(
+		{
+			method : "feed",
+			name : "Érvénytelen szavazat",
+			display : "popup",
+			link : "",
+			picture : URL.createObjectURL(blob),
+			description : "Egy érvénytelen szavazat!"
+		}
+	);
+}

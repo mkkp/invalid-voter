@@ -17,6 +17,7 @@
 </head>
 <body onLoad="init()">
 	<section class="container">
+		<div id="fb-root"></div>
 		<div class="row">
 			<div class="col-md-12 toolbar">
 				<b>Szín:</b> <input type="color" name="pencilColorPicker"
@@ -27,8 +28,10 @@
 					width="30px">
 				<button id="clearBtn" class="btn btn-danger"
 					onclick="clearContent();">Törlés</button>
-				<button id="downloadBtn" class="btn btn-primary"
+				<button id="downloadBtn" class="btn btn-success"
 					onclick="downloadImage();">Letöltés</button>
+				<button id="shareBtn" class="btn btn-primary"
+					onclick="shareOnFacebook();">Megosztás</button>
 			</div>
 		</div>
 		<div class="row">
