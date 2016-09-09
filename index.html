@@ -19,7 +19,7 @@
 	<section class="container">
 		<div id="fb-root"></div>
 		<div class="row">
-			<div class="col-md-12 toolbar">
+			<div class="col-md-11 toolbar">
 				<b>Szín:</b> <input type="color" name="pencilColorPicker"
 					id="pencilColorPicker" value="#FF0000"
 					onchange="updatePencilColor(event)"> <b>Vonalvastagság:</b>
@@ -35,11 +35,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12" id="canvasContainer">
+			<div class="col-md-11" id="canvasContainer">
 				<canvas id="drawingArea" onmousemove="updateMouseCoordinates(event)"
 					onmousedown="mouseButtonPressed(event)"
 					onmouseup="mouseButtonReleased(event)"
 					onmouseleave="mouseLeaved(event)"></canvas>
+			</div>
+			<div class="col-md-1 stickers">
+				<img id="draggable" src="./images/logo.png" alt="Magyar Kétfarkú Kutya Párt" align="middle"/>
 			</div>
 		</div>
 	</section>

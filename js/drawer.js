@@ -23,6 +23,8 @@ function init() {
 	drawBackground();
 
 	setCursorByID("drawingArea", "crosshair");
+	
+	setCursorByID("draggable", "move");
 
 	setLineWidth();
 	setColor();
