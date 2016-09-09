@@ -30,7 +30,7 @@ function init() {
 
 function drawBackground() {
 	background = new Image();
-	background.src = "./images/szavazolap.jpg";
+	background.src = "./images/szavazolap.png";
 
 	background.onload = backgroundLoaded;
 }
@@ -115,15 +115,15 @@ function clearContent() {
 }
 
 function downloadImage() {
-	canvas.toBlob(saveAs, "image/jpeg", 1);
+	canvas.toBlob(saveAs, "image/png", 1);
 }
 
 function saveAs(blob) {
 	var url = URL.createObjectURL(blob);
 	var a = document.createElement("a");
 	a.setAttribute("href", url);
-	a.setAttribute("download", "ervenytelen-szavazolap.jpg");
-	a.setAttribute("type", "image/jpeg");
+	a.setAttribute("download", "ervenytelen-szavazolap.png");
+	a.setAttribute("type", "image/png");
 	a.click();
 	a.remove();
 }
@@ -160,7 +160,7 @@ function disableScroll() {
 }
 
 function shareOnFacebook() {
-	canvas.toBlob(publishOnFacebook, "image/jpeg", 1);
+	canvas.toBlob(publishOnFacebook, "image/png", 1);
 }
 
 function publishOnFacebook(blob) {
