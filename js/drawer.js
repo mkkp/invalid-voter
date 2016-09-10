@@ -124,7 +124,7 @@ function saveAs(blob) {
 	var url = URL.createObjectURL(blob);
 	var a = document.createElement("a");
 	a.setAttribute("href", url);
-	a.setAttribute("download", "ervenytelen-szavazolap.png");
+	a.setAttribute("download", "ervenytelen-szavazolap"+getRandomArbitrary(1,99999)+".png");
 	a.setAttribute("type", "image/png");
 	a.click();
 	a.remove();
@@ -176,4 +176,8 @@ function publishOnFacebook(blob) {
 			description : "Egy érvénytelen szavazat!"
 		}
 	);
+}
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
 }
