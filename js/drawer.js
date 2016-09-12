@@ -22,8 +22,8 @@ function init() {
 	drawingCanvas = document.getElementById("drawingArea");
 	drawingContext = drawingCanvas.getContext("2d");
 
-	stickerCanvas = document.getElementById("stickerArea");
-	stickerContext = stickerCanvas.getContext("2d");
+	//stickerCanvas = document.getElementById("stickerArea");
+	//stickerContext = stickerCanvas.getContext("2d");
 
 	canvasContainer = document.getElementById("canvasContainer");
 
@@ -88,7 +88,7 @@ function backgroundLoaded(event) {
 	drawingContext.save();
 	drawingCanvas.width = background.width;
 	drawingCanvas.height = background.height;
-	stickerCanvas.height = background.height;
+	//stickerCanvas.height = background.height;
 	drawingContext.drawImage(background, 0, 0, background.width, background.height);
 	drawingContext.restore();
 }
