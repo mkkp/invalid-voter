@@ -15,6 +15,17 @@ body {
 #drawingArea {
 	display: inline-block;
 	box-shadow: 0px 2px 10px #000000;
+	margin: 0;
+	padding: 0;
+	width:660px;
+	height:459px;
+}
+
+#stickerArea {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	height:459px;
 }
 
 .toolbar {

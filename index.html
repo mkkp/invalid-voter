@@ -18,32 +18,22 @@
 <body onLoad="init()">
 	<section class="container">
 		<div id="fb-root"></div>
-		<div class="row">
-			<div class="col-md-11 toolbar">
-				<b>Szín:</b> <input type="color" name="pencilColorPicker"
-					id="pencilColorPicker" value="#FF0000"
-					onchange="updatePencilColor(event)"> <b>Vonalvastagság:</b>
-				<input type="number" name="pencilWidthInput" id="pencilWidthInput"
-					onchange="updatePencilWidth(event)" min="1" max="50" value="3"
-					width="30px">
-				<button id="clearBtn" class="btn btn-danger"
-					onclick="clearContent();">Törlés</button>
-				<button id="downloadBtn" class="btn btn-success"
-					onclick="downloadImage();">Letöltés</button>
-				<button id="shareBtn" class="btn btn-primary"
-					onclick="shareOnFacebook();">Megosztás</button>
-			</div>
+		<div class="row col-md-12 toolbar">
+			<b>Szín:</b> <input type="color" name="pencilColorPicker"
+				id="pencilColorPicker" value="#0000FF"
+				onchange="updatePencilColor(event)"> <b>Vonalvastagság:</b>
+			<input type="number" name="pencilWidthInput" id="pencilWidthInput"
+				onchange="updatePencilWidth(event)" min="1" max="50" value="3"
+				width="30px">
+			<button id="clearBtn" class="btn btn-danger"
+				onclick="clearContent();">Törlés</button>
+			<button id="downloadBtn" class="btn btn-success"
+				onclick="downloadImage();">Letöltés</button>
+			<button id="shareBtn" class="btn btn-primary"
+				onclick="shareOnFacebook();">Megosztás</button>
 		</div>
-		<div class="row">
-			<div class="col-md-11" id="canvasContainer">
-				<canvas id="drawingArea" onmousemove="updateMouseCoordinates(event)"
-					onmousedown="mouseButtonPressed(event)"
-					onmouseup="mouseButtonReleased(event)"
-					onmouseleave="mouseLeaved(event)"></canvas>
-			</div>
-			<div class="col-md-1 stickers">
-				<img id="draggable" src="./images/logo.png" alt="Magyar Kétfarkú Kutya Párt" align="middle"/>
-			</div>
+		<div class="row" id="canvasContainer">
+			<canvas id="drawingArea" class="col-md-12"></canvas>
 		</div>
 	</section>
 </body>
