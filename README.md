@@ -1,6 +1,6 @@
 # MKKP INVALID VOTER APPLICATION
 * TODO: Need a good ballot paper for background
-* TODO: Need facebook share option
+* TODO: Clear the facebook text data (if needed change the facebook appID)
 
 ## Readme formatting help
 https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
