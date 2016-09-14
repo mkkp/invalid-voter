@@ -17,6 +17,14 @@ var lastPosition = {
 var stickers = [];
 var isDrawing = false;
 var isDragging = false;
+var actualImagePosition = {
+	x : 0,
+	y : 0
+}
+var lastImagePosition = {
+	x : 0,
+	y : 0
+}
 
 function init() {
 	drawingCanvas = document.getElementById("drawingArea");
@@ -33,26 +41,34 @@ function init() {
 
 	setCursorByID("drawingArea", "crosshair");
 
-	setCursorByID("draggable", "move");
+	//setCursorByID("stickerArea", "move");
 
 	setLineWidth();
 	setColor();
-	
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1187765324579277',
-      xfbml      : true,
-      version    : 'v2.7'
-    });
-  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+	addEventsToDrawingCanvas();
+
+	//addEventsToStickerCanvas();
+
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId : '1187765324579277',
+			xfbml : true,
+			version : 'v2.7'
+		});
+	};
+
+	(function(d, s, id) {
+		var js,
+			fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 }
 
 function drawBackground() {
@@ -63,24 +79,30 @@ function drawBackground() {
 }
 
 function drawStickers() {
+	stickerCanvas.width = stickerCanvas.width;
+
 	var logo = new Image();
 	logo.onload = logoLoaded;
 	logo.src = "./images/logo.png";
 	var logoSticker = {
 		image : logo,
+		src : logo.png,
 		x : 10,
 		y : 0,
 		alt : "Magyar Kétfarkú Kutya Párt"
 	};
+
 	var menyet = new Image();
 	menyet.onload = menyetLoaded;
 	menyet.src = "./images/menyet.png";
 	var menyetSticker = {
 		image : menyet,
+		src : menyet.png,
 		x : 10,
 		y : 0,
 		alt : "Savköpő menyét"
 	};
+
 	stickers = [ logoSticker, menyetSticker ];
 }
 
@@ -106,7 +128,7 @@ function stickerLoaded(id) {
 	if (stickers[id - 1]) {
 		stickers[id].y = stickers[id - 1].y + stickers[id - 1].image.height + 5;
 	}
-	stickerContext.drawImage(stickers[id].image, stickers[id].x, stickers[id].y, stickers[id].image.width, stickers[id].image.height);
+	stickerContext.drawImage(stickers[id].image, stickers[id].x, stickers[id].y);
 	stickerContext.restore();
 }
 
@@ -162,23 +184,8 @@ function updateMouseCoordinates(event) {
 	}
 }
 
-function updateStickerCoordinates(event) {
-	if (isDragging) {
-
-	}
-}
-
-function pickUpSticker(event) {
-	isDragging = true;
-}
-
-function releaseSticker(event) {
-	isDragging = false;
-}
-
 function saveActualPosition(event) {
 	var rect = drawingCanvas.getBoundingClientRect();
-	console.log(event.clientX + " " + rect.left + " " + event.clientY + " " + rect.top);
 	actualPosition.x = event.clientX - rect.left;
 	actualPosition.y = event.clientY - rect.top;
 }
@@ -195,6 +202,34 @@ function draw() {
 	drawingContext.stroke();
 	drawingContext.closePath();
 	drawingContext.restore();
+}
+
+function updateStickerCoordinates(event) {
+	if (isDragging) {
+		//lastImagePosition.x = actualImagePosition.x;
+		//lastImagePosition.y = actualImagePosition.y;
+		//saveActualImagePosition(event);
+		//drawImage();
+	}
+}
+
+function saveActualImagePosition(event) {
+	var rect = stickerCanvas.getBoundingClientRect();
+	actualImagePosition.x = event.clientX - rect.left;
+	actualImagePosition.y = event.clientY - rect.top;
+}
+
+
+function pickUpSticker(event) {
+	isDragging = true;
+}
+
+function releaseSticker(event) {
+	isDragging = false;
+}
+
+function drawImage(){
+	
 }
 
 function setCursorByID(id, cursorStyle) {
@@ -258,83 +293,87 @@ function disableScroll() {
 function shareOnFacebook() {
 	var data = canvas.toDataURL("image/png");
 	try {
-        blob = dataURItoBlob(data);
-    } catch (e) {
-        console.log(e);
-    }
-    FB.getLoginStatus(function (response) {
-        console.log(response);
-        if (response.status === "connected") {
-            postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
-        } else if (response.status === "not_authorized") {
-            FB.login(function (response) {
-                postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
-            }, {scope: "publish_actions"});
-        } else {
-            FB.login(function (response) {
-                postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
-            }, {scope: "publish_actions"});
-        }
-    });
+		blob = dataURItoBlob(data);
+	} catch (e) {
+		console.log(e);
+	}
+	FB.getLoginStatus(function(response) {
+		console.log(response);
+		if (response.status === "connected") {
+			postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
+		} else if (response.status === "not_authorized") {
+			FB.login(function(response) {
+				postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
+			}, {
+				scope : "publish_actions"
+			});
+		} else {
+			FB.login(function(response) {
+				postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
+			}, {
+				scope : "publish_actions"
+			});
+		}
+	});
 }
 
 function postImageToFacebook(token, filename, mimeType, imageData, message) {
-    var fd = new FormData();
-    fd.append("access_token", token);
-    fd.append("source", imageData);
-    fd.append("no_story", true);
+	var fd = new FormData();
+	fd.append("access_token", token);
+	fd.append("source", imageData);
+	fd.append("no_story", true);
 
-    // Upload image to facebook without story(post to feed)
-    $.ajax({
-        url: "https://graph.facebook.com/me/photos?access_token=" + token,
-        type: "POST",
-        data: fd,
-        processData: false,
-        contentType: false,
-        cache: false,
-        success: function (data) {
-            console.log("success: ", data);
+	// Upload image to facebook without story(post to feed)
+	$.ajax({
+		url : "https://graph.facebook.com/me/photos?access_token=" + token,
+		type : "POST",
+		data : fd,
+		processData : false,
+		contentType : false,
+		cache : false,
+		success : function(data) {
+			console.log("success: ", data);
 
-            // Get image source url
-            FB.api(
-                "/" + data.id + "?fields=images",
-                function (response) {
-                    if (response && !response.error) {
-                        //console.log(response.images[0].source);
+			// Get image source url
+			FB.api(
+				"/" + data.id + "?fields=images",
+				function(response) {
+					if (response && !response.error) {
+						//console.log(response.images[0].source);
 
-                        // Create facebook post using image
-                        FB.api(
-                            "/me/feed",
-                            "POST",
-                            {
-                                "message": "",
-                                "picture": response.images[0].source,
-                                "link": window.location.href,
-                                "name": 'Look at the cute panda!',
-                                "description": message,
-                                "privacy": {
-                                    value: 'SELF'
-                                }
-                            },
-                            function (response) {
-                                if (response && !response.error) {
-                                    /* handle the result */
-                                    console.log("Posted story to facebook");
-                                    console.log(response);
-                                }
-                            }
-                        );
-                    }
-                }
-            );
-        },
-        error: function (shr, status, data) {
-            console.log("error " + data + " Status " + shr.status);
-        },
-        complete: function (data) {
-            //console.log('Post to facebook Complete');
-        }
-    });
+						// Create facebook post using image
+						FB.api(
+							"/me/feed",
+							"POST",
+							{
+								"message" : "",
+								"picture" : response.images[0].source,
+								"link" : window.location.href,
+								"name" : 'Look at the cute panda!',
+								"description" : message,
+								"privacy" : {
+									value : 'SELF'
+								}
+							},
+							function(response) {
+								if (response && !response.error) {
+									/* handle the result */
+									console.log("Posted story to facebook");
+									console.log(response);
+								}
+							}
+						);
+					}
+				}
+			);
+		},
+		error : function(shr, status, data) {
+			console.log("error " + data + " Status " + shr.status);
+		},
+		complete : function(data) {
+			//console.log('Post to facebook Complete');
+		}
+	});
 }
 
 function getRandomArbitrary(min, max) {
@@ -342,22 +381,24 @@ function getRandomArbitrary(min, max) {
 }
 
 function dataURItoBlob(dataURI) {
-  // convert base64 to raw binary data held in a string
-  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-  var byteString = atob(dataURI.split(',')[1]);
+	// convert base64 to raw binary data held in a string
+	// doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+	var byteString = atob(dataURI.split(',')[1]);
 
-  // separate out the mime component
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+	// separate out the mime component
+	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
 
-  // write the bytes of the string to an ArrayBuffer
-  var ab = new ArrayBuffer(byteString.length);
-  var ia = new Uint8Array(ab);
-  for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-  }
+	// write the bytes of the string to an ArrayBuffer
+	var ab = new ArrayBuffer(byteString.length);
+	var ia = new Uint8Array(ab);
+	for (var i = 0; i < byteString.length; i++) {
+		ia[i] = byteString.charCodeAt(i);
+	}
 
-  // write the ArrayBuffer to a blob, and you're done
-  var blob = new Blob([ab], {type: mimeString});
-  return blob;
+	// write the ArrayBuffer to a blob, and you're done
+	var blob = new Blob([ ab ], {
+		type : mimeString
+	});
+	return blob;
 
 }
