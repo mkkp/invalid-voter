@@ -291,7 +291,7 @@ function disableScroll() {
 }
 
 function shareOnFacebook() {
-	var data = canvas.toDataURL("image/png");
+	var data = drawingCanvas.toDataURL("image/png");
 	try {
 		blob = dataURItoBlob(data);
 	} catch (e) {
