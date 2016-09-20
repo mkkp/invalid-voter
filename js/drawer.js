@@ -50,13 +50,7 @@ function init() {
 
 	//addEventsToStickerCanvas();
 
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId : '1187765324579277',
-			xfbml : true,
-			version : 'v2.7'
-		});
-	};
+	window.fbAsyncInit = fbInit;
 
 	(function(d, s, id) {
 		var js,
@@ -66,9 +60,17 @@ function init() {
 		}
 		js = d.createElement(s);
 		js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js";
+		js.src = "//connect.facebook.net/hu_HU/sdk.js";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
+}
+
+function fbInit() {
+	FB.init({
+		appId : '1187765324579277',
+		xfbml : true,
+		version : 'v2.7'
+	});
 }
 
 function drawBackground() {
@@ -292,113 +294,25 @@ function disableScroll() {
 
 function shareOnFacebook() {
 	var data = drawingCanvas.toDataURL("image/png");
-	try {
-		blob = dataURItoBlob(data);
-	} catch (e) {
-		console.log(e);
-	}
-	FB.getLoginStatus(function(response) {
-		console.log(response);
-		if (response.status === "connected") {
-			postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
-		} else if (response.status === "not_authorized") {
-			FB.login(function(response) {
-				postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
-			}, {
-				scope : "publish_actions"
-			});
-		} else {
-			FB.login(function(response) {
-				postImageToFacebook(response.authResponse.accessToken, "Canvas to Facebook/Twitter", "image/png", blob, window.location.href);
-			}, {
-				scope : "publish_actions"
+	$.post(
+		'/save.php',
+		{'img': data},
+		function (result) {
+			FB.ui({
+				method: 'feed',
+				name: 'Érvénytelen szavazás gyakorló',
+				link: 'http://aaa.lh:8080/?id=' + result.id,
+				picture: result.link,
+				caption: 'Érvénytelen szavazat'
+
+			}, function(response) {
+				if(response && response.post_id){}
+				else{}
 			});
 		}
-	});
-}
-
-function postImageToFacebook(token, filename, mimeType, imageData, message) {
-	var fd = new FormData();
-	fd.append("access_token", token);
-	fd.append("source", imageData);
-	fd.append("no_story", true);
-
-	// Upload image to facebook without story(post to feed)
-	$.ajax({
-		url : "https://graph.facebook.com/me/photos?access_token=" + token,
-		type : "POST",
-		data : fd,
-		processData : false,
-		contentType : false,
-		cache : false,
-		success : function(data) {
-			console.log("success: ", data);
-
-			// Get image source url
-			FB.api(
-				"/" + data.id + "?fields=images",
-				function(response) {
-					if (response && !response.error) {
-						//console.log(response.images[0].source);
-
-						// Create facebook post using image
-						FB.api(
-							"/me/feed",
-							"POST",
-							{
-								"message" : "",
-								"picture" : response.images[0].source,
-								"link" : window.location.href,
-								"name" : 'Look at the cute panda!',
-								"description" : message,
-								"privacy" : {
-									value : 'SELF'
-								}
-							},
-							function(response) {
-								if (response && !response.error) {
-									/* handle the result */
-									console.log("Posted story to facebook");
-									console.log(response);
-								}
-							}
-						);
-					}
-				}
-			);
-		},
-		error : function(shr, status, data) {
-			console.log("error " + data + " Status " + shr.status);
-		},
-		complete : function(data) {
-			//console.log('Post to facebook Complete');
-		}
-	});
+	);
 }
 
 function getRandomArbitrary(min, max) {
 	return Math.random() * (max - min) + min;
-}
-
-function dataURItoBlob(dataURI) {
-	// convert base64 to raw binary data held in a string
-	// doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-	var byteString = atob(dataURI.split(',')[1]);
-
-	// separate out the mime component
-	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-	// write the bytes of the string to an ArrayBuffer
-	var ab = new ArrayBuffer(byteString.length);
-	var ia = new Uint8Array(ab);
-	for (var i = 0; i < byteString.length; i++) {
-		ia[i] = byteString.charCodeAt(i);
-	}
-
-	// write the ArrayBuffer to a blob, and you're done
-	var blob = new Blob([ ab ], {
-		type : mimeString
-	});
-	return blob;
-
 }
