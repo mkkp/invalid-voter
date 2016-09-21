@@ -23,7 +23,7 @@ if(isset($_POST["image"])) {
 			$returnValue["imageID"] = $filename;
 
 			// Tell FB to scrape the page so the image will appear in the share preview
-			exec('curl -X POST -F "id=http://ketfarkukutya.com/invalid-voter/?image=' . $filename . '" -F "scrape=true" "https://graph.facebook.com/"');
+			exec('curl -X POST -F "id=http://ketfarkukutya.com/invalid-voter/?image=' . $filename . '" -F "scrape=true" "https://graph.facebook.com/" > /dev/null 2> /dev/null &');
 			echo json_encode($returnValue);
 		}
 		else {
