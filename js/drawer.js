@@ -181,6 +181,7 @@ function saveActualPosition(event) {
 	var rect = drawingCanvas.getBoundingClientRect();
 	actualPosition.x = (event.pageX || event.changedTouches[0].pageX) - rect.left;
 	actualPosition.y = (event.pageY || event.changedTouches[0].pageY) - rect.top;
+	console.log(JSON.stringify(actualPosition));
 }
 
 function draw() {
@@ -285,12 +286,12 @@ function disableScroll() {
 
 function shareOnFacebook() {
 
-	var shareWindow = window.open("http://ketfarkukutya.com/invalid-voter/share.php", "Megosztás a Facebook-on", "width=560,height=610");
+	var shareWindow = window.open("share.php", "Megosztás a Facebook-on", "width=560,height=610");
 
 	var data = drawingCanvas.toDataURL("image/png");
 
 	// POST the Base64 encoded PNG to the server
-	$.post("http://ketfarkukutya.com/invalid-voter/api.php", {'image': data}, function(result) {
+	$.post("api.php", {'image': data}, function(result) {
 		if(result.success == true) {
 			setTimeout(function() {	// Wait for FB to cache the image
 				shareWindow.location = "https://www.facebook.com/dialog/share?app_id=1187765324579277&display=popup&href=http%3A%2F%2Fketfarkukutya%2Ecom%2Finvalid%2Dvoter%2F%3Fimage%3D" + result.imageID + "&redirect_uri=http%3A%2F%2Fketfarkukutya%2Ecom%2Finvalid%2Dvoter%2Fshare%2Ephp%3Fclosewindow";
