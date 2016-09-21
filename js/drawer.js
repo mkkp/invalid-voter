@@ -49,6 +49,16 @@ function init() {
 	addEventsToDrawingCanvas();
 
 	//addEventsToStickerCanvas();
+
+	if(typeof showImage !== "undefined") {
+		$('.row').css('display', 'none');
+		$('.imageview').css('display', 'block');
+		$('.imageview-image img').attr('src', showImage);
+		$('.imageview-close').click(function() {
+			$('.row').css('display', 'block');
+			$('.imageview').css('display', 'none');
+		});
+	}
 }
 
 function drawBackground() {

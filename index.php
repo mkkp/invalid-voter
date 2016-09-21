@@ -8,10 +8,13 @@
 	<meta property="og:title" content="Érvénytelen szavazás gyakorló" />
 	<meta property="og:description" content="Itt gyakorolhatod az érvénytelen szavazást az október 2-i népszavazásra." />
 	<?php
-	if(isset($_GET['image']))
+	if(isset($_GET['image'])) {
 		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png" />';
-	else
+		echo '<script type="text/javascript">var showImage = "http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png";</script>';
+	}
+	else {
 		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/images/szavazolap.png" />';
+	}
 	?>
 	<script type="text/javascript" src="./js/drawer.js"></script>
 	<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
@@ -43,5 +46,12 @@
 			<canvas id="drawingArea"></canvas>
 		</div>
 	</section>
+	<div class="imageview imageview-bg"></div>
+	<div class="imageview imageview-image">
+		<img src="images/loading.svg">
+	</div>
+	<div class="imageview imageview-close">
+		<img src="images/close-icon.png">
+	</div>
 </body>
 </html>
