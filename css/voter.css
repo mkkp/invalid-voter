@@ -6,6 +6,17 @@ html, body {
 body {
 	background-image: url("../images/bg.jpg");
 	background-size: cover;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-ms-touch-action: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	overflow: hidden;
+}
+
+.row, .container {
+	padding-top: 10px;
 }
 
 #canvasContainer {

@@ -153,6 +153,9 @@ function addEventsToDrawingCanvas() {
 	drawingCanvas.addEventListener("mousedown", startDrawing);
 	drawingCanvas.addEventListener("mouseup", stopDrawing);
 	drawingCanvas.addEventListener("mouseleave", stopDrawingMouseLeft);
+	drawingCanvas.addEventListener("touchstart", startDrawing);
+	drawingCanvas.addEventListener("touchmove", updateMouseCoordinates);
+	drawingCanvas.addEventListener("touchstop", stopDrawing);
 }
 
 function addEventsToStickerCanvas() {
@@ -186,8 +189,8 @@ function updateMouseCoordinates(event) {
 
 function saveActualPosition(event) {
 	var rect = drawingCanvas.getBoundingClientRect();
-	actualPosition.x = event.clientX - rect.left;
-	actualPosition.y = event.clientY - rect.top;
+	actualPosition.x = (event.pageX || event.changedTouches[0].pageX) - rect.left;
+	actualPosition.y = (event.pageY || event.changedTouches[0].pageY) - rect.top;
 }
 
 function draw() {

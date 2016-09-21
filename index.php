@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="hu_HU" />
-<meta property="og:title" content="Érvénytelen szavazás gyakorló" />
-<meta property="og:description"
-	content="Itt gyakorolhatod az érvénytelen szavazást az október 2-i népszavazásra." />
-<?php
-if(isset($_GET['image']))
-	echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png" />';
-else
-	echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/images/szavazolap.png" />';
-?>
-<script type="text/javascript" src="./js/drawer.js"></script>
-<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./css/voter.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<title>Érvénytelen szavazás gyakorló</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no">
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="hu_HU" />
+	<meta property="og:title" content="Érvénytelen szavazás gyakorló" />
+	<meta property="og:description" content="Itt gyakorolhatod az érvénytelen szavazást az október 2-i népszavazásra." />
+	<?php
+	if(isset($_GET['image']))
+		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png" />';
+	else
+		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/images/szavazolap.png" />';
+	?>
+	<script type="text/javascript" src="./js/drawer.js"></script>
+	<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/voter.css">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous">
+	<title>Érvénytelen szavazás gyakorló</title>
 </head>
 <body onLoad="init()">
 	<section class="container">
