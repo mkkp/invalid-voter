@@ -8,11 +8,10 @@
 <meta property="og:description"
 	content="Itt gyakorolhatod az érvénytelen szavazást az október 2-i népszavazásra." />
 <?php
-$headers = apache_request_headers();
 if(isset($_GET['image']))
-	echo '<meta property="og:image" content="http://' . $headers['Host'] . '/uploads/' . $_GET['image'] . '.png" />';
+	echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png" />';
 else
-	echo '<meta property="og:image" content="http://' . $headers['Host'] . '/images/szavazolap.png" />';
+	echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/images/szavazolap.png" />';
 ?>
 <script type="text/javascript" src="./js/drawer.js"></script>
 <script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>

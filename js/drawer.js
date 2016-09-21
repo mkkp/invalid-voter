@@ -302,7 +302,7 @@ function shareOnFacebook() {
 				$('.share-loading').hide();
 				FB.ui({
 					method: 'share',
-					href: 'http://' + window.location.host + '/?image=' + result.imageID
+					href: 'http://ketfarkukutya.com/invalid-voter/?image=' + result.imageID
 				});	// TODO: display a message about successful sharing
 			}, 1000);
 		}
