@@ -43,8 +43,5 @@
 			<canvas id="drawingArea"></canvas>
 		</div>
 	</section>
-	<div class="share-loading">
-		<img src="images/loading.svg">
-	</div>
 </body>
 </html>

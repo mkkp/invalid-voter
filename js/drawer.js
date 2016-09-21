@@ -49,26 +49,6 @@ function init() {
 	addEventsToDrawingCanvas();
 
 	//addEventsToStickerCanvas();
-
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId : '1187765324579277',
-			xfbml : true,
-			version : 'v2.7'
-		});
-	};
-
-	(function(d, s, id) {
-		var js,
-			fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {
-			return;
-		}
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
 }
 
 function drawBackground() {
@@ -294,19 +274,16 @@ function disableScroll() {
 }
 
 function shareOnFacebook() {
-	$('.share-loading').show();
+
+	var shareWindow = window.open("http://ketfarkukutya.com/invalid-voter/share.php", "Megosztás a Facebook-on", "width=560,height=610");
 
 	var data = drawingCanvas.toDataURL("image/png");
 
 	// POST the Base64 encoded PNG to the server
-	$.post("api.php", {'image': data}, function(result) {
+	$.post("http://ketfarkukutya.com/invalid-voter/api.php", {'image': data}, function(result) {
 		if(result.success == true) {
 			setTimeout(function() {	// Wait for FB to cache the image
-				$('.share-loading').hide();
-				FB.ui({
-					method: 'share',
-					href: 'http://ketfarkukutya.com/invalid-voter/?image=' + result.imageID
-				});	// TODO: display a message about successful sharing
+				shareWindow.location = "https://www.facebook.com/dialog/share?app_id=1187765324579277&display=popup&href=http%3A%2F%2Fketfarkukutya%2Ecom%2Finvalid%2Dvoter%2F%3Fimage%3D" + result.imageID + "&redirect_uri=http%3A%2F%2Fketfarkukutya%2Ecom%2Finvalid%2Dvoter%2Fshare%2Ephp%3Fclosewindow";
 			}, 1000);
 		}
 		else {
