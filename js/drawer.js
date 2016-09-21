@@ -294,7 +294,7 @@ function shareOnFacebook() {
 		if(result.success == true) {
 			setTimeout(function() {	// Wait for FB to cache the image
 				shareWindow.location = "https://www.facebook.com/dialog/share?app_id=1187765324579277&display=popup&href=http%3A%2F%2Fketfarkukutya%2Ecom%2Finvalid%2Dvoter%2F%3Fimage%3D" + result.imageID + "&redirect_uri=http%3A%2F%2Fketfarkukutya%2Ecom%2Finvalid%2Dvoter%2Fshare%2Ephp%3Fclosewindow";
-			}, 2000);
+			}, 3000);
 		}
 		else {
 			console.log(result.errorMsg);
