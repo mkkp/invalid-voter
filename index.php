@@ -9,8 +9,9 @@
 	<meta property="og:description" content="Itt gyakorolhatod az érvénytelen szavazást az október 2-i népszavazásra." />
 	<?php
 	if(isset($_GET['image'])) {
-		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png" />';
-		echo '<script type="text/javascript">var showImage = "http://ketfarkukutya.com/invalid-voter/uploads/' . $_GET['image'] . '.png";</script>';
+		$imageid = preg_replace("/[^a-z0-9]/", "", $_GET['image']);
+		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/uploads/' . $imageid . '.png" />';
+		echo '<script type="text/javascript">var showImage = "http://ketfarkukutya.com/invalid-voter/uploads/' . $imageid . '.png";</script>';
 	}
 	else {
 		echo '<meta property="og:image" content="http://ketfarkukutya.com/invalid-voter/images/szavazolap.png" />';
